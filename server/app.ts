@@ -5,6 +5,13 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { ErrorMiddleware } from './middleware/error';
 import userRouter from './routes/user.route';
+import courseRouter from './routes/course.route';
+
+// import bodyParser from 'body-parser'; // For JSON parsing
+// // const app = express();
+
+// app.use(express.json()); // Built-in body-parser
+// app.use(bodyParser.urlencoded({ extended: true })); // To handle URL-encoded data
 
 // Body parser
 app.use(express.json({limit: "50mb"}))
@@ -14,6 +21,7 @@ app.use(cookieParser())
 
 // Routes
 app.use("/api/v1", userRouter)
+app.use("/api/v1", courseRouter)
 
 // // cors => cross origin resource sharing
 app.use(cors({
