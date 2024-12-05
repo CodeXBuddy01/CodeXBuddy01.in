@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmation</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #444;
+    }
+
+    .container {
+      background: linear-gradient(135deg, #ffffff, #f9f9f9);
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 750px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #1b998b;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #666;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .course-info {
+      text-align: left;
+      margin-top: 30px;
+    }
+
+    .course-info h4 {
+      font-size: 1.4rem;
+      color: #264653;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+    }
+
+    table td {
+      padding: 15px 10px;
+      /* border-bottom: 1px solid #ddd; */
+      font-size: 1rem;
+    }
+
+    .first-td {
+      background-color: #e8f5e9;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .table-row {
+      text-align: center;
+    }
+
+    .second-td {
+      color: #333;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .email-footer {
+      /* background-color: #e0f7fa; */
+      padding: 15px 0;
+      margin-top: 30px;
+      border-radius: 6px;
+      color: #004d40;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .email-footer a {
+      color: #00796b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .email-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .cta-button {
+      background-color: #1b998b;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: #1a8f7f;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      table td {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="message-sm">
+      <h1>Your CodeXBuddy01 E-learning Order is Confirmed!</h1>
+      <p>We’re excited to help you start learning. Here are your order details:</p>
+    </div>
+
+    <div class="course-info">
+      <h4>Order Summary:</h4>
+      <table>
+        <tr>
+          <td>Order #: <strong><%= order._id %></strong></td>
+          <td>Order Date: <strong><%= order.date %></strong></td>
+        </tr>
+      </table>
+
+      <table>
+        <tr>
+          <td class="first-td">Item</td>
+          <td class="first-td">Qty</td>
+          <td class="first-td">Cost</td>
+        </tr>
+        <tr>
+          <td  class="second-td"><%= order.name %></td>
+          <td  class="second-td">1</td>
+          <td  class="second-td">$<%= order.price %></td>
+        </tr>
+      </table>
+
+      <table class="table-row" style="border-top: 1px solid #00000029;">
+        <tr>
+          <td style="text-align: left; padding-right: 10px;">Subtotal:</td>
+          <td style="text-align: right;">$<%= order.price %></td>
+        </tr>
+        <tr>
+          <td style="text-align: left; padding-right: 10px;">Total:</td>
+          <td style="text-align: right;">$<%= order.price %></td>
+        </tr>
+      </table>
+      <!-- Border after the last row -->
+<hr style="border-top: 1px solid #00000029; margin: 20px 0;" />
+    </div>
+
+    <a href="https://codexbuddy01.in" class="cta-button" target="_blank">Visit our website</a>
+
+    <div class="email-footer">
+      <p>If you have any questions, please contact our support team at <a href="mailto:codexbuddy01@gmail.com">codexbuddy01@gmail.com</a></p>
+      <p>&copy; 2024 CodeXBuddy01. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -134,8 +134,7 @@ export const getCourseByUser = CatchAsyncError(async (req: Request, res: Respons
     try {
         const userCourseList = req.user?.courses;
         const courseId = req.params.id;
-console.log("userCourseList", userCourseList)
-console.log("courseId", courseId)
+        
         const courseExists = userCourseList?.find((course: any) => course._id.toString() === courseId)
 
         if(!courseExists){
