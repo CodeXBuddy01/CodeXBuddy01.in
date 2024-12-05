@@ -7,6 +7,7 @@ import { ErrorMiddleware } from './middleware/error';
 import userRouter from './routes/user.route';
 import courseRouter from './routes/course.route';
 import orderRouter from './routes/order.route';
+import notificationRoute from './routes/notification.route';
 
 // import bodyParser from 'body-parser'; // For JSON parsing
 // // const app = express();
@@ -21,7 +22,7 @@ app.use(express.json({limit: "50mb"}))
 app.use(cookieParser())
 
 // Routes
-app.use("/api/v1", userRouter, courseRouter, orderRouter)
+app.use("/api/v1", userRouter, courseRouter, orderRouter, notificationRoute)
 
 // // cors => cross origin resource sharing
 app.use(cors({
