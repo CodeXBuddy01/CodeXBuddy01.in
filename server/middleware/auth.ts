@@ -21,7 +21,7 @@ export const isAuthenticated = CatchAsyncError(async (req: Request, res: Respons
     const user = await redis.get(decoded.id);
 
     if (!user) {
-        return next(new ErrorHandler("User not found or session expired", 404));
+        return next(new ErrorHandler("Please Login to access this resource", 404));
     }
 
     req.user = JSON.parse(user);
