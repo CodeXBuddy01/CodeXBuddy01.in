@@ -14,3 +14,5 @@ tailwind -> yes
 src directory -> no
 App Router -> yes
 import aliases  --> no
+
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material react-hot-toast react-redux @reduxjs/toolkit formik yup

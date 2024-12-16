@@ -6,14 +6,18 @@ import NavItems from "../utils/NavItems";
 import { ThemeSwitcher } from "../utils/ThemeSwitcher";
 import { HiOutlineMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
 import Image from "next/image";
+import CustomModel from "../utils/CustomModel";
+import Login from "../components/Auth/Login";
 
 type Props = {
   open: boolean;
   setOpen: (open: boolean) => void;
   activeItem: number;
+  route: string;
+  setRoute: (route: string) => void;
 };
 
-const Header: FC<Props> = ({ activeItem, setOpen }) => {
+const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const [active, setActive] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
 
@@ -54,7 +58,7 @@ const Header: FC<Props> = ({ activeItem, setOpen }) => {
               <div className="w-12 h-12 lg:w-16 lg:h-16 relative">
                 <Image
                   src="/assests/CXB01.png" // Corrected path
-                  alt="CodeXBuddy Logo"
+                  alt="CodeXBuddy01 Logo"
                   width={64}
                   height={64}
                   className="object-contain"
@@ -66,7 +70,7 @@ const Header: FC<Props> = ({ activeItem, setOpen }) => {
                 href={"/"}
                 className="text-[28px] lg:text-[30px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 hover:scale-105 transition-transform dark:from-yellow-300 dark:to-blue-400"
               >
-                Code<span className="text-blue-500">X</span>Buddy
+                Code<span className="text-blue-500">X</span>Buddy01
               </Link>
             </div>
 
@@ -113,6 +117,23 @@ const Header: FC<Props> = ({ activeItem, setOpen }) => {
           </div>
         )}
       </div>
+      {
+        route === "Login" && (
+          <>
+          {
+            open && (
+              <CustomModel
+              open={open}
+              setOpen={setOpen}
+              setRoute={setRoute}
+              activeItem={activeItem}
+              component={Login}
+               />
+            )
+          }
+          </>
+        )
+      }
     </div>
   );
 };
