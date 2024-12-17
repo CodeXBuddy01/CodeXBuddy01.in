@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import {Model, Box} from "@mui/material"
+import {Modal, Box} from "@mui/material"
 
 type Props = {
     open: boolean;
@@ -11,7 +11,7 @@ type Props = {
 
 const CustomModel: FC<Props> = ({open, setOpen, setRoute, component:Component}) => {
   return (
-    <Model
+    <Modal
     open={open}
     onClose={() => setOpen(false)}
     aria-labelledby="model-model-title"
@@ -22,7 +22,7 @@ const CustomModel: FC<Props> = ({open, setOpen, setRoute, component:Component}) 
         >
             <Component setOpen={setOpen} setRoute={setRoute} />
         </Box>
-    </Model>
+    </Modal>
   )
 }
 
