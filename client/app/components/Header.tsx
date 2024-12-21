@@ -8,6 +8,8 @@ import { HiOutlineMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
 import Image from "next/image";
 import CustomModel from "../utils/CustomModel";
 import Login from "../components/Auth/Login";
+import SignUp from "../components/Auth/SignUp";
+import verification from "../components/Auth/Verification";
 
 type Props = {
   open: boolean;
@@ -117,23 +119,48 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
           </div>
         )}
       </div>
-      {
-        route === "Login" && (
-          <>
-          {
-            open && (
-              <CustomModel
+      {route === "Login" && (
+        <>
+          {open && (
+            <CustomModel
               open={open}
               setOpen={setOpen}
               setRoute={setRoute}
               activeItem={activeItem}
               component={Login}
-               />
-            )
-          }
-          </>
-        )
-      }
+            />
+          )}
+        </>
+      )}
+
+      {route === "Sign-Up" && (
+        <>
+          {open && (
+            <CustomModel
+              open={open}
+              setOpen={setOpen}
+              setRoute={setRoute}
+              activeItem={activeItem}
+              component={SignUp}
+            />
+          )}
+        </>
+      )}
+
+{route === "verification" && (
+        <>
+          {open && (
+            <CustomModel
+              open={open}
+              setOpen={setOpen}
+              setRoute={setRoute}
+              activeItem={activeItem}
+              component={verification}
+            />
+          )}
+        </>
+      )}
+
     </div>
   );
 };

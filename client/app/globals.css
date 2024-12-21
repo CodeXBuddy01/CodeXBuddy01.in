@@ -16,6 +16,18 @@
   }
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
 }
@@ -44,4 +56,8 @@ body {
   83.33% {
     opacity: 0.4;
   }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
 }
