@@ -11,7 +11,7 @@ const Hero: FC<Props> = () => {
         {/* Left Content */}
         <div className="text-center lg:text-left max-w-lg">
           <h1 className="text-4xl lg:text-6xl font-extrabold text-white leading-tight">
-            Welcome to <span className="text-yellow-300">CodeXBuddy</span>
+            Welcome to <span className="text-yellow-300">CodeXBuddy01</span>
           </h1>
           <p className="text-lg text-gray-200 mt-4">
             Learn programming from the best! Build your skills in MERN, Redux,

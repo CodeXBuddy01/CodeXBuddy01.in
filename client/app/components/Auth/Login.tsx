@@ -93,9 +93,10 @@ const Login: FC<Props> = ({setRoute}) => {
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">
             Or Join With
         </h5>
-        <div className="flex items-center my-3">
-            <FcGoogle />
-            <AiFillGithub />
+        <div className="flex items-center justify-center my-3">
+          <FcGoogle size={30} className="cursor-pointer mr-2" />
+          <AiFillGithub size={30} className="cursor-pointer ml-2" />
+        </div>
             <h5 className="text-center pt-4 font-Poppins text-[14px]">
                 Not have any account?{" "}
                 <span className="text-[#2190ff] pl-1 cursor-pointer"
@@ -104,7 +105,6 @@ const Login: FC<Props> = ({setRoute}) => {
                     Sign up
                 </span>
             </h5>
-        </div>
       </form>
       <br />
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -10,6 +10,8 @@ import {
 } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { styles } from "../../../app/styles/style";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import toast from "react-hot-toast";
 
 type Props = {
   setRoute: (route: string) => void;
@@ -19,19 +21,38 @@ const schema = Yup.object().shape({
   name: Yup.string().required("Please Enter Your Name"),
   email: Yup.string()
     .email("Invalid email!")
-    .required("Please enter a valid email address!"),
+    .required("Please enter your email address!"),
   password: Yup.string().required("Please enter a valid password!").min(6),
 });
 
 const Signup: FC<Props> = ({ setRoute }) => {
   const [show, setShow] = useState(false);
+  const [register, { data, error, isSuccess }] = useRegisterMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      const message = data?.message || "Registration Successful";
+      toast.success(message);
+      setRoute("Verification"); // Redirect not working
+    }
+    if (error) {
+      if ("data" in error) {
+        const errorData = error as any;
+        toast.error(errorData.data.message);
+      }
+    }
+  }, [isSuccess, error]);
 
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "" },
     validationSchema: schema,
-    onSubmit: async ({ email, password }) => {
-    //   console.log(email, password);
-    setRoute("verification")
+    onSubmit: async ({ name, email, password }) => {
+      try {
+        const data = { name, email, password };
+        await register(data);
+      } catch (err) {
+        console.error("Registration error:", err);
+      }
     },
   });
 
@@ -42,12 +63,12 @@ const Signup: FC<Props> = ({ setRoute }) => {
       <h1 className={`${styles.title}`}>Join to CodeXBuddy01</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className={`${styles.label}`} htmlFor="email">
+          <label className={`${styles.label}`} htmlFor="name">
             Enter your Name
           </label>
           <input
-            type="name"
-            name=""
+            type="text"
+            name="name"
             value={values.name}
             onChange={handleChange}
             id="name"
@@ -60,12 +81,13 @@ const Signup: FC<Props> = ({ setRoute }) => {
             <span className="text-red-500 pt-2 block">{errors.name}</span>
           )}
         </div>
+
         <label className={`${styles.label}`} htmlFor="email">
           Enter your Email
         </label>
         <input
           type="email"
-          name=""
+          name="email"
           value={values.email}
           onChange={handleChange}
           id="email"
@@ -77,8 +99,9 @@ const Signup: FC<Props> = ({ setRoute }) => {
         {errors.email && touched.email && (
           <span className="text-red-500 pt-2 block">{errors.email}</span>
         )}
+
         <div className="w-full mt-5 relative mb-1">
-          <label className={`${styles.label}`} htmlFor="email">
+          <label className={`${styles.label}`} htmlFor="password">
             Enter your Password
           </label>
           <input
@@ -109,26 +132,28 @@ const Signup: FC<Props> = ({ setRoute }) => {
         {errors.password && touched.password && (
           <span className="text-red-500 pt-2 block">{errors.password}</span>
         )}
+
         <div className="w-full mt-5">
           <input type="submit" value="Sign Up" className={`${styles.button}`} />
         </div>
+
         <br />
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">
           Or Join With
         </h5>
-        <div className="flex items-center my-3">
-          <FcGoogle />
-          <AiFillGithub />
-          <h5 className="text-center pt-4 font-Poppins text-[14px]">
-            Already have an account?{" "}
-            <span
-              className="text-[#2190ff] pl-1 cursor-pointer"
-              onClick={() => setRoute("Sign-Up")}
-            >
-              Sign in
-            </span>
-          </h5>
+        <div className="flex items-center justify-center my-3">
+          <FcGoogle size={30} className="cursor-pointer mr-2" />
+          <AiFillGithub size={30} className="cursor-pointer ml-2" />
         </div>
+        <h5 className="text-center pt-4 font-Poppins text-[14px]">
+          Already have an account?{" "}
+          <span
+            className="text-[#2190ff] pl-1 cursor-pointer"
+            onClick={() => setRoute("Login")}
+          >
+            Login
+          </span>
+        </h5>
       </form>
       <br />
     </div>

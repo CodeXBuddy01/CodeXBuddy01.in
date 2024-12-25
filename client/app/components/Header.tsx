@@ -9,7 +9,7 @@ import Image from "next/image";
 import CustomModel from "../utils/CustomModel";
 import Login from "../components/Auth/Login";
 import SignUp from "../components/Auth/SignUp";
-import verification from "../components/Auth/Verification";
+import Verification from "../components/Auth/Verification";
 
 type Props = {
   open: boolean;
@@ -147,7 +147,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
         </>
       )}
 
-{route === "verification" && (
+{route === "Verification" && (
         <>
           {open && (
             <CustomModel
@@ -155,7 +155,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
               setOpen={setOpen}
               setRoute={setRoute}
               activeItem={activeItem}
-              component={verification}
+              component={Verification}
             />
           )}
         </>

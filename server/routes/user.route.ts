@@ -4,6 +4,7 @@ import { authorizeRoles, isAuthenticated } from '../middleware/auth';
 const userRouter = express.Router();
 
 userRouter.post('/registration', registrationUser);
+// userRouter.post('/registeration', registrationUser);
 
 userRouter.post('/activate-user', activateUser);
 

@@ -23,13 +23,19 @@ app.use(express.json({limit: "50mb"}))
 // cookies parser
 app.use(cookieParser())
 
-// Routes
-app.use("/api/v1", userRouter, courseRouter, orderRouter, notificationRoute, analyticsRouter, layoutRouter)
 
 // // cors => cross origin resource sharing
-app.use(cors({
-    origin: process.env.ORIGIN
-}))
+// Or configure specific origin
+app.use(
+    cors({
+      origin: "http://localhost:3000", // Allow requests only from this origin
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true, // Allow credentials like cookies
+    })
+  );
+
+  // Routes
+app.use("/api/v1", userRouter, courseRouter, orderRouter, notificationRoute, analyticsRouter, layoutRouter)
 
 // //Fixed it using gpt
 // app.use(cors({
