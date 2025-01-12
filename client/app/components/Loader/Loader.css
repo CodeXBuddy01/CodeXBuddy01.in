@@ -1,0 +1,79 @@
+/* General Reset */
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #101820;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+  } */
+  
+  /* Loading Container */
+  .loading-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  /* Loading Text */
+  .loading-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00c2ff; /* Vibrant blue */
+    animation: bounce 1.2s infinite ease-in-out;
+  }
+  
+  /* Animation for individual letters */
+  .loading-text:nth-child(1) { animation-delay: 0s; }
+  .loading-text:nth-child(2) { animation-delay: 0.1s; }
+  .loading-text:nth-child(3) { animation-delay: 0.2s; }
+  .loading-text:nth-child(4) { animation-delay: 0.3s; }
+  .loading-text:nth-child(5) { animation-delay: 0.4s; }
+  .loading-text:nth-child(6) { animation-delay: 0.5s; }
+  .loading-text:nth-child(7) { animation-delay: 0.6s; }
+  
+  /* Dots Animation */
+  .dot {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6ec4; /* Soft pink for contrast */
+    animation: blink 1.2s infinite ease-in-out;
+  }
+  
+  .dot:nth-child(8) { animation-delay: 0s; }
+  .dot:nth-child(9) { animation-delay: 0.2s; }
+  .dot:nth-child(10) { animation-delay: 0.4s; }
+  
+  /* Keyframe Animations */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .loading-text, .dot {
+      font-size: 1.5rem;
+    }
+  }
+  
