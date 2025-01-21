@@ -1,9 +1,11 @@
-import Image from 'next/image';
-import React, { FC } from 'react';
-import avatarDefault from '../../../public/assests/avatar.svg';
-import { RiLockPasswordLine } from 'react-icons/ri';
-import { SiCoursera } from 'react-icons/si';
-import { AiOutlineLogout } from 'react-icons/ai';
+import Image from "next/image";
+import React, { FC } from "react";
+import avatarDefault from "../../../public/assests/avatar.svg";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { SiCoursera } from "react-icons/si";
+import { AiOutlineLogout } from "react-icons/ai";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import Link from "next/link";
 
 type Props = {
   user: any;
@@ -13,57 +15,95 @@ type Props = {
   logOutHandler: any;
 };
 
-const SideBarProfile: FC<Props> = ({ user, active, avatar, setActive, logOutHandler }) => {
+const SideBarProfile: FC<Props> = ({
+  user,
+  active,
+  avatar,
+  setActive,
+  logOutHandler,
+}) => {
   return (
     <div className="w-full">
       {/* My Account */}
       <div
         className={`w-full flex items-center gap-3 px-3 py-4 cursor-pointer ${
-          active === 1 ? 'dark:bg-slate-800 bg-gray-200' : 'bg-transparent'
+          active === 1 ? "dark:bg-slate-800 bg-gray-200" : "bg-transparent"
         }`}
         onClick={() => setActive(1)}
       >
         <Image
-          src={user.avatar || avatar ? user.avatar.url || avatar : avatarDefault}
+          src={
+            user.avatar || avatar ? user.avatar.url || avatar : avatarDefault
+          }
           alt="Avatar"
           width={30}
           height={30}
           className="rounded-full border border-gray-300"
         />
-        <h5 className="font-Poppins text-sm text-black dark:text-white">My Account</h5>
+        <h5 className="font-Poppins text-sm text-black dark:text-white">
+          My Account
+        </h5>
       </div>
 
       {/* Change Password */}
       <div
         className={`w-full flex items-center gap-3 px-3 py-4 cursor-pointer ${
-          active === 2 ? 'dark:bg-slate-800 bg-gray-200' : 'bg-transparent'
+          active === 2 ? "dark:bg-slate-800 bg-gray-200" : "bg-transparent"
         }`}
         onClick={() => setActive(2)}
       >
-        <RiLockPasswordLine size={20} className="text-gray-700 dark:text-white" />
-        <h5 className="font-Poppins text-sm text-black dark:text-white">Change Password</h5>
+        <RiLockPasswordLine
+          size={20}
+          className="text-gray-700 dark:text-white"
+        />
+        <h5 className="font-Poppins text-sm text-black dark:text-white">
+          Change Password
+        </h5>
       </div>
 
       {/* Enrolled Courses */}
       <div
         className={`w-full flex items-center gap-3 px-3 py-4 cursor-pointer ${
-          active === 3 ? 'dark:bg-slate-800 bg-gray-200' : 'bg-transparent'
+          active === 3 ? "dark:bg-slate-800 bg-gray-200" : "bg-transparent"
         }`}
         onClick={() => setActive(3)}
       >
         <SiCoursera size={20} className="text-gray-700 dark:text-white" />
-        <h5 className="font-Poppins text-sm text-black dark:text-white">Enrolled Courses</h5>
+        <h5 className="font-Poppins text-sm text-black dark:text-white">
+          Enrolled Courses
+        </h5>
       </div>
+
+      {/* Admin Dashboard */}
+      {user.role === "admin" && (
+        <Link
+          className={`w-full flex items-center gap-3 px-3 py-4 cursor-pointer ${
+            active === 6 ? "dark:bg-slate-800 bg-gray-200" : "bg-transparent"
+          }`}
+          // onClick={() => setActive(6)}
+          href={"/admin"}
+        >
+          <MdOutlineAdminPanelSettings
+            size={20}
+            className="text-gray-700 dark:text-white"
+          />
+          <h5 className="font-Poppins text-sm text-black dark:text-white">
+            Admin Dashboard
+          </h5>
+        </Link>
+      )}
 
       {/* Log Out */}
       <div
         className={`w-full flex items-center gap-3 px-3 py-4 cursor-pointer ${
-          active === 4 ? 'dark:bg-slate-800 bg-gray-200' : 'bg-transparent'
+          active === 4 ? "dark:bg-slate-800 bg-gray-200" : "bg-transparent"
         }`}
         onClick={logOutHandler}
       >
         <AiOutlineLogout size={20} className="text-gray-700 dark:text-white" />
-        <h5 className="font-Poppins text-sm text-black dark:text-white">Log Out</h5>
+        <h5 className="font-Poppins text-sm text-black dark:text-white">
+          Log Out
+        </h5>
       </div>
     </div>
   );

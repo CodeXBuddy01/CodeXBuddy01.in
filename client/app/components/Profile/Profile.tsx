@@ -5,6 +5,7 @@ import SideBarProfile from './SideBarProfile';
 import { useLogOutQuery } from '@/redux/features/auth/authApi';
 import { signOut } from 'next-auth/react';
 import ProfileInfo from './ProfileInfo';
+import ChangePassword from './ChangePassword'
 
 type Props = {
   user: any;
@@ -61,6 +62,7 @@ const Profile: FC<Props> = ({ user }) => {
       </div>
       <div className="flex-1 mt-8">
         {active === 1 && <ProfileInfo avatar={avatar} user={user} />}
+        {active === 2 && <ChangePassword avatar={avatar} user={user} />}
       </div>
     </div>
   );

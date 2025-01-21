@@ -2,25 +2,23 @@ import Image from 'next/image';
 import React, { FC, useEffect, useState } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
 import avatarIcon from '../../../public/assests/avatar.svg';
-import { useUpdateAvatarMutation } from '@/redux/features/user/userApi';
+import { useEditProfileMutation, useUpdateAvatarMutation } from '@/redux/features/user/userApi';
 import { useLoadUserQuery } from '@/redux/features/api/apiSlice';
+import toast from 'react-hot-toast';
 
 type Props = {
   avatar: string | null;
-  user: {
-    name: string;
-    email: string;
-    avatar?: { url: string };
-  };
+  user: any;
 };
 
 const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   const [name, setName] = useState(user && user.name);
   const [updateAvatar, {isSuccess, error}] = useUpdateAvatarMutation();
+  const [editProfile, {isSuccess:success, error:updateError}] = useEditProfileMutation();
   const [loadUser, setLoadUser] = useState(false);
   const {} = useLoadUserQuery(undefined, {skip: loadUser ? false : true});
 
-  const imageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const imageHandler = async (e: any) => {
     const fileReader = new FileReader();
 
     fileReader.onload = () => {
@@ -35,18 +33,25 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   };
 
   useEffect(() => {
-    if(isSuccess){
+    if(isSuccess || success){
       setLoadUser(true);
     }
-    if(error){
+    if(error || updateError){
       console.log(error)
     }
-  }, [isSuccess, error])
+    if(success){
+      toast.success("Profile updated successfully!")
+    }
+  }, [isSuccess, error, success, updateError]);
   
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted with name:', name);
+    if(name !== "") {
+      await editProfile({
+        name: name,
+      })
+    }
   };
 
   return (
@@ -54,7 +59,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
       {/* Avatar Section */}
       <div className="relative mb-4 sm:mb-6">
         <Image
-          src={user?.avatar?.url || avatar || avatarIcon}
+          src={user.avatar || avatar ? user.avatar.url || avatar : avatarIcon}
           alt="User Avatar"
           width={120}
           height={120}
@@ -62,6 +67,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
         />
         <input
           type="file"
+          name=''
           id="avatar"
           className="hidden"
           onChange={imageHandler}
@@ -97,12 +103,12 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
             value={user?.email}
           />
         </div>
-        <button
+        <input
           className="w-full px-4 py-2 sm:px-6 sm:py-3 bg-[#37a39a] text-white font-semibold rounded-md hover:bg-[#2d8d85] transition duration-200"
+          required
+          value="Update"
           type="submit"
-        >
-          Update
-        </button>
+        />
       </form>
     </div>
   );
